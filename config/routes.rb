@@ -11,6 +11,7 @@ Rails.application.routes.draw do
                    sessions: 'api/sessions',
                    registrations: 'api/registrations'
                }
+    resources :games, controller: 'api/games'
   end
 
   root 'application#index'

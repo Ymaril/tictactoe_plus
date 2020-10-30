@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_28_130749) do
+ActiveRecord::Schema.define(version: 2020_10_30_110554) do
+
+  create_table "games", force: :cascade do |t|
+    t.integer "x_player_id", null: false
+    t.integer "o_player_id"
+    t.string "state", default: "created", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["o_player_id"], name: "index_games_on_o_player_id"
+    t.index ["x_player_id"], name: "index_games_on_x_player_id"
+  end
 
   create_table "jwt_denylists", force: :cascade do |t|
     t.string "jti"
