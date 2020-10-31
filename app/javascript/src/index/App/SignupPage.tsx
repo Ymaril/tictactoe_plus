@@ -11,7 +11,9 @@ function SignupPage() {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  function postSignup() {
+  function postSignup(e) {
+    e.preventDefault();
+
     api
       .post("/api/signup", {
         user: { email, password, password_confirmation: passwordConfirmation },
@@ -21,7 +23,7 @@ function SignupPage() {
   }
 
   if (token) {
-    return <Redirect to="/" />;
+    return <Redirect to="/games" />;
   }
 
   return (

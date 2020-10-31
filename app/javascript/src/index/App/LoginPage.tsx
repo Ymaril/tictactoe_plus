@@ -18,7 +18,7 @@ function LoginPage() {
   }
 
   if (token) {
-    return <Redirect to="/" />;
+    return <Redirect to="/games" />;
   }
 
   return (
