@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from "react";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Home from "./App/Home";
 import Games from "./App/Games";
 import Login from "./App/Login";
@@ -8,6 +8,7 @@ import PrivateRoute from "./App/PrivateRoute";
 import { AuthContext } from "./shared/auth";
 import { ApiContext } from "./shared/api";
 import api from "src/api";
+import Game from "src/index/App/Game";
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -68,7 +69,10 @@ const App = () => {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <PrivateRoute path="/games" component={Games} />
+            <Switch>
+              <PrivateRoute path='/games/:id' component={Game}/>
+              <PrivateRoute path="/games" component={Games} />
+            </Switch>
           </div>
         </Router>
       </ApiContext.Provider>
