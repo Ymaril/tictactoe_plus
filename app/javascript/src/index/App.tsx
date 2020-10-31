@@ -18,12 +18,13 @@ const App = () => {
     api.defaults.headers.common = { Authorization: token };
   }
 
-  api.defaults.validateStatus = (res) => {
-    if (res === 401) {
-      sighOut();
-    }
-    return true;
-  };
+  api.interceptors.response.use(
+      response => response,
+      error => {
+        if (error.response.status === 401) { sighOut(); }
+        return error;
+      }
+  );
 
   const signIn = (token: string, user: object) => {
     localStorage.setItem("token", token);
