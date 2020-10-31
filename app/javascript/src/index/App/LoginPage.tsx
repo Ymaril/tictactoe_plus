@@ -4,7 +4,7 @@ import { Card, Form, Input, Button, Error } from "./shared/AuthForms";
 import { useAuth } from "src/index/shared/auth";
 import api from "src/api";
 
-function Login() {
+function LoginPage() {
   const { token, signIn } = useAuth();
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
@@ -46,4 +46,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;

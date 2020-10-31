@@ -1,14 +1,14 @@
 import React, { useState, Fragment } from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Home from "./App/Home";
-import Games from "./App/Games";
-import Login from "./App/Login";
-import Signup from "./App/Signup";
+import GamesPage from "./App/GamesPage";
+import LoginPage from "./App/LoginPage";
+import SignupPage from "./App/SignupPage";
 import PrivateRoute from "./App/PrivateRoute";
 import { AuthContext } from "./shared/auth";
 import { ApiContext } from "./shared/api";
 import api from "src/api";
-import Game from "src/index/App/Game";
+import GamePage from "./App/GamePage";
 import {Container, Nav, Navbar} from "react-bootstrap";
 
 const App = () => {
@@ -48,7 +48,7 @@ const App = () => {
       <ApiContext.Provider value={api}>
         <Router>
           <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="#home">TicTocToe+</Navbar.Brand>
+            <Navbar.Brand>TicTocToe+</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
@@ -66,11 +66,11 @@ const App = () => {
           </Navbar>
           <Container className='mt-5'>
             <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/signup" component={SignupPage} />
             <Switch>
-              <PrivateRoute path='/games/:id' component={Game}/>
-              <PrivateRoute path="/games" component={Games} />
+              <PrivateRoute path='/games/:id' component={GamePage}/>
+              <PrivateRoute path="/games" component={GamesPage} />
             </Switch>
           </Container>
         </Router>

@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState } from "react";
 import { useApi } from "../shared/api";
 
-function Game({ match }) {
+function GamePage({ match }) {
     const [game, setGame] = useState(undefined);
     const [error, setError] = useState(false);
     const api = useApi();
@@ -22,4 +22,4 @@ function Game({ match }) {
     );
 }
 
-export default Game;
+export default GamePage;

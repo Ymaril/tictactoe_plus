@@ -3,7 +3,7 @@ import { useApi } from "../shared/api";
 import {Card, ListGroup, Row} from "react-bootstrap";
 import {LinkContainer} from 'react-router-bootstrap';
 
-function Games() {
+function GamesPage() {
   const [games, setGames] = useState([]);
   const api = useApi();
 
@@ -43,4 +43,4 @@ function Games() {
   );
 }
 
-export default Games;
+export default GamesPage;
