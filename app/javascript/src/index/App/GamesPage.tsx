@@ -18,6 +18,11 @@ function GamesPage() {
               <Card className='ml-2' key={index}>
                 <Card.Body>
                   <Card.Title>Игра #{game.id}</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    {
+                      {created: 'Создана', started: 'В процессе', finished: 'Закончена'}[game.state]
+                    }
+                  </Card.Subtitle>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
                   <ListGroup.Item>{game.x_player.email}</ListGroup.Item>
@@ -27,12 +32,12 @@ function GamesPage() {
                 </ListGroup>
                 <Card.Body>
                   {
-                    !game.o_player &&
-                    <LinkContainer to="/login">
+                    game.state === 'created' &&
+                    <LinkContainer to={`/games/${game.id}#play`}>
                       <Card.Link>Играть</Card.Link>
                     </LinkContainer>
                   }
-                  <LinkContainer to="/login">
+                  <LinkContainer to={`/games/${game.id}`}>
                     <Card.Link>Смотреть</Card.Link>
                   </LinkContainer>
                 </Card.Body>
