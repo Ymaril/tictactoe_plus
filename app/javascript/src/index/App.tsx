@@ -9,6 +9,7 @@ import { AuthContext } from "./shared/auth";
 import { ApiContext } from "./shared/api";
 import api from "src/api";
 import Game from "src/index/App/Game";
+import {Container, Nav, Navbar} from "react-bootstrap";
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -46,27 +47,24 @@ const App = () => {
     <AuthContext.Provider value={{ signIn, sighOut, token, currentUser }}>
       <ApiContext.Provider value={api}>
         <Router>
-          <div>
-            <ul>
-              <li>
-                <Link to="/">Home Page</Link>
-              </li>
-              {!token && (
+          <Navbar bg="light" expand="lg">
+            <Navbar.Brand href="#home">TicTocToe+</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto">
+                {!token &&
                 <Fragment>
-                  <li>
-                    <Link to="/login">Login</Link>
-                  </li>
-                  <li>
-                    <Link to="/signup">Signup</Link>
-                  </li>
-                </Fragment>
-              )}
-              {token && (
-                <li>
-                  <Link to="/games">Games</Link>
-                </li>
-              )}
-            </ul>
+                  <Nav.Link as={Link} to='/login'>Войти</Nav.Link>
+                  <Nav.Link as={Link} to='/signup'>Регистрация</Nav.Link>
+                </Fragment>}
+                {token &&
+                <Fragment>
+                  <Nav.Link as={Link} to='/games'>Игры</Nav.Link>
+                </Fragment>}
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+          <Container className='mt-5'>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
@@ -74,7 +72,7 @@ const App = () => {
               <PrivateRoute path='/games/:id' component={Game}/>
               <PrivateRoute path="/games" component={Games} />
             </Switch>
-          </div>
+          </Container>
         </Router>
       </ApiContext.Provider>
     </AuthContext.Provider>
