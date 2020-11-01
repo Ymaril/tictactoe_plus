@@ -21,4 +21,8 @@ class Game < ApplicationRecord
       transition started: :finished
     end
   end
+
+  def as_json(options={})
+    super(include: [:x_player, :o_player], **options)
+  end
 end

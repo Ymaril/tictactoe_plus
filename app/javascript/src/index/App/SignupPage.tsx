@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { useAuth } from "src/index/shared/auth";
+import { useAuth } from "../shared/auth";
 import api from "src/api";
 import {Alert, Button, Form} from "react-bootstrap";
 

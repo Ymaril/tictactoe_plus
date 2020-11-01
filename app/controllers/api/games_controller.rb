@@ -5,7 +5,7 @@ module Api
     def index
       @games = Game.all
 
-      render json: @games, include: %i[x_player o_player]
+      render json: @games
     end
 
     def create
@@ -17,7 +17,7 @@ module Api
     def show
       @game = Game.find(params[:id])
 
-      render json: @game, include: %i[x_player o_player]
+      render json: @game
     end
   end
 end
