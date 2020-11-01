@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { useAuth } from "src/index/shared/auth";
+import { useAuth } from "../shared/auth";
 import api from "src/api";
 import {Alert, Button, Form} from "react-bootstrap";
 
@@ -10,7 +10,9 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function postLogin() {
+  function postLogin(e) {
+    e.preventDefault();
+
     api
       .post("/api/login", { user: { email, password } })
       .then((result) => signIn(result.headers.authorization, result.data))
