@@ -23,7 +23,7 @@ const App = () => {
 
   function getWebSocketUrl() {
     const url = new URL(window.location.origin);
-    url.protocol = "ws:";
+    url.protocol = url.protocol === "https:" ? "wss:" : "ws:";
     url.pathname = "/cable";
     url.search = `token=${token}`;
     return url.toString();
