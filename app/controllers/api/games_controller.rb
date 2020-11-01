@@ -8,6 +8,12 @@ module Api
       render json: @games, include: %i[x_player o_player]
     end
 
+    def create
+      @game = Game.create(x_player: current_user)
+
+      render json: @game
+    end
+
     def show
       @game = Game.find(params[:id])
 
