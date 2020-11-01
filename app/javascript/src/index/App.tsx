@@ -66,7 +66,7 @@ const App = () => {
         <CableContext.Provider value={cable}>
           <Router>
             <Navbar bg="light" expand="lg">
-              <Navbar.Brand>TicTocToe+</Navbar.Brand>
+              <Navbar.Brand>TicTacToe+</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">

@@ -13,8 +13,8 @@ default: &default
 
 development:
   <<: *default
-  database: tictoctoe_dev
-  username: tictoctoe
+  database: tictactoe_dev
+  username: tictactoe
   password: 12345
 
 # Warning: The database defined as "test" will be erased and
@@ -22,10 +22,10 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: tictoctoe_test
+  database: tictactoe_test
 
 production:
   <<: *default
-  database: tictoctoe_production
-  username: tictoctoe
+  database: tictactoe_production
+  username: tictactoe
   password: <%= ENV['TODOS_API_DATABASE_PASSWORD'] %>
