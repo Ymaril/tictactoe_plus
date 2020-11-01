@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useAuth } from "../shared/auth";
 import api from "src/api";
-import {Alert, Button, Form} from "react-bootstrap";
+import { Alert, Button, Form } from "react-bootstrap";
 
 function LoginPage() {
   const { token, signIn } = useAuth();
@@ -26,24 +26,27 @@ function LoginPage() {
   return (
     <Form onSubmit={postLogin}>
       {errors.map((error, i) => (
-          <Alert key={i} variant="danger">{error}</Alert>
+        <Alert key={i} variant="danger">
+          {error}
+        </Alert>
       ))}
 
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Email</Form.Label>
         <Form.Control
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+          type="email"
+          placeholder="Enter email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </Form.Group>
 
       <Form.Group controlId="formBasicPassword">
         <Form.Label>Пароль</Form.Label>
-        <Form.Control type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+        <Form.Control
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </Form.Group>
       <Button variant="primary" type="submit">

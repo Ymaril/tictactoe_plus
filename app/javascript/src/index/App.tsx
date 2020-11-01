@@ -1,4 +1,4 @@
-import React, {useState, Fragment, useEffect} from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Home from "./App/Home";
 import GamesPage from "./App/GamesPage";
@@ -7,22 +7,24 @@ import SignupPage from "./App/SignupPage";
 import PrivateRoute from "./App/PrivateRoute";
 import { AuthContext } from "./shared/auth";
 import { ApiContext } from "./shared/api";
-import {CableContext, useCable} from "./shared/cable";
+import { CableContext, useCable } from "./shared/cable";
 import api from "src/api";
 import GamePage from "./App/GamePage";
-import {Container, Nav, Navbar} from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import actionCable from "actioncable";
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const existingUser = JSON.parse(localStorage.getItem("currentUser"));
   const [currentUser, setCurrentUser] = useState(existingUser);
-  const [cable, setCable] = useState(actionCable.createConsumer(getWebSocketUrl()));
+  const [cable, setCable] = useState(
+    actionCable.createConsumer(getWebSocketUrl())
+  );
 
   function getWebSocketUrl() {
     const url = new URL(window.location.origin);
-    url.protocol = 'ws:';
-    url.pathname = '/cable';
+    url.protocol = "ws:";
+    url.pathname = "/cable";
     url.search = `token=${token}`;
     return url.toString();
   }
@@ -32,11 +34,13 @@ const App = () => {
   }
 
   api.interceptors.response.use(
-      response => response,
-      error => {
-        if (error.response.status === 401 && token) { sighOut(); }
-        return Promise.reject(error);
+    (response) => response,
+    (error) => {
+      if (error.response.status === 401 && token) {
+        sighOut();
       }
+      return Promise.reject(error);
+    }
   );
 
   const signIn = (token: string, user: object) => {
@@ -66,24 +70,32 @@ const App = () => {
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                  {!token &&
-                  <Fragment>
-                    <Nav.Link as={Link} to='/login'>Войти</Nav.Link>
-                    <Nav.Link as={Link} to='/signup'>Регистрация</Nav.Link>
-                  </Fragment>}
-                  {token &&
-                  <Fragment>
-                    <Nav.Link as={Link} to='/games'>Игры</Nav.Link>
-                  </Fragment>}
+                  {!token && (
+                    <Fragment>
+                      <Nav.Link as={Link} to="/login">
+                        Войти
+                      </Nav.Link>
+                      <Nav.Link as={Link} to="/signup">
+                        Регистрация
+                      </Nav.Link>
+                    </Fragment>
+                  )}
+                  {token && (
+                    <Fragment>
+                      <Nav.Link as={Link} to="/games">
+                        Игры
+                      </Nav.Link>
+                    </Fragment>
+                  )}
                 </Nav>
               </Navbar.Collapse>
             </Navbar>
-            <Container className='mt-5'>
+            <Container className="mt-5">
               <Route exact path="/" component={Home} />
               <Route path="/login" component={LoginPage} />
               <Route path="/signup" component={SignupPage} />
               <Switch>
-                <PrivateRoute path='/games/:id' component={GamePage}/>
+                <PrivateRoute path="/games/:id" component={GamePage} />
                 <PrivateRoute path="/games" component={GamesPage} />
               </Switch>
             </Container>
