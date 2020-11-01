@@ -3,10 +3,11 @@ class AddBoardToGame < ActiveRecord::Migration[6.0]
     add_column :games,
                :board,
                :integer,
-               array: true
+               array: true,
+               default: [0] * 100
     add_column :games,
                :x_move,
                :boolean,
-               default: [0] * 100
+               default: true
   end
 end

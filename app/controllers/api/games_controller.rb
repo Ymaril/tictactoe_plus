@@ -19,5 +19,12 @@ module Api
 
       render json: @game
     end
+
+    def join
+      @game = Game.find(params[:id])
+      @game.o_player = current_user
+      @game.save
+      render json: @game
+    end
   end
 end

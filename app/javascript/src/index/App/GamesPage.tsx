@@ -50,11 +50,6 @@ function GamesPage() {
               </ListGroup.Item>
             </ListGroup>
             <Card.Body>
-              {game.state === "created" && (
-                <LinkContainer to={`/games/${game.id}#play`}>
-                  <Card.Link>Играть</Card.Link>
-                </LinkContainer>
-              )}
               <LinkContainer to={`/games/${game.id}`}>
                 <Card.Link>Смотреть</Card.Link>
               </LinkContainer>

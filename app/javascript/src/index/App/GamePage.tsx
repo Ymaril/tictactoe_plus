@@ -3,6 +3,7 @@ import { useApi } from "../shared/api";
 import { useAuth } from "../shared/auth";
 import { useCable } from "../shared/cable";
 import Board from "src/index/App/GamePage/Board";
+import { Button } from "react-bootstrap";
 
 function GamePage({ match }) {
   const [game, setGame] = useState(undefined);
@@ -29,26 +30,42 @@ function GamePage({ match }) {
       .get(`/api/games/${match.params.id}`)
       .then((res) => setGame(res.data))
       .catch((e) => setError(true));
+
+    return () => {
+      gameChannel?.unsubscribe();
+    };
   }, []);
 
   if (error) {
     return <div>Произошла ошибка</div>;
   }
 
+  const join = () => {
+    api
+      .put(`/api/games/${match.params.id}/join`)
+      .then((res) => setGame(res.data))
+      .catch((e) => setError(true));
+  };
+
   const getMovePlayer = () => (game.x_move ? game.x_player : game.o_player);
 
   const sendMove = (square: number) => {
-    gameChannel && gameChannel.send({ move: square });
+    gameChannel?.send({ move: square });
   };
 
   return (
     <Fragment>
       {game && (
         <Fragment>
-          <h1>Ходит {getMovePlayer().email}</h1>
+          <h1>Ходит {getMovePlayer()?.email || "Никто"}</h1>
+          {!game.o_player && game.x_player.id !== currentUser.id && (
+            <Button variant="primary" onClick={() => join()}>
+              Вступить
+            </Button>
+          )}
           {game.board && (
             <Board
-              locked={currentUser.id !== getMovePlayer().id}
+              locked={currentUser.id !== getMovePlayer()?.id}
               board={game.board}
               onClick={(square) => sendMove(square)}
             />

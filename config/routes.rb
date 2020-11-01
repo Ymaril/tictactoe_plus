@@ -11,7 +11,11 @@ Rails.application.routes.draw do
                    sessions: 'api/sessions',
                    registrations: 'api/registrations'
                }
-    resources :games, controller: 'api/games'
+    resources :games, controller: 'api/games' do
+      member do
+        put 'join'
+      end
+    end
   end
 
   root 'application#index'
