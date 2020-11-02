@@ -23,6 +23,8 @@ development:
 test:
   <<: *default
   database: tictactoe_test
+  username: tictactoe
+  password: 12345
 
 production:
   <<: *default

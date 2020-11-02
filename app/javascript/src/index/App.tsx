@@ -1,13 +1,12 @@
 import React, { useState, Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import Home from "./App/Home";
 import GamesPage from "./App/GamesPage";
 import LoginPage from "./App/LoginPage";
 import SignupPage from "./App/SignupPage";
 import PrivateRoute from "./App/PrivateRoute";
 import { AuthContext } from "./shared/auth";
 import { ApiContext } from "./shared/api";
-import { CableContext, useCable } from "./shared/cable";
+import { CableContext } from "./shared/cable";
 import api from "src/api";
 import GamePage from "./App/GamePage";
 import { Container, Nav, Navbar } from "react-bootstrap";
@@ -91,7 +90,7 @@ const App = () => {
               </Navbar.Collapse>
             </Navbar>
             <Container className="mt-5">
-              <Route exact path="/" component={Home} />
+              <PrivateRoute exact path="/" component={GamesPage} />
               <Route path="/login" component={LoginPage} />
               <Route path="/signup" component={SignupPage} />
               <Switch>
