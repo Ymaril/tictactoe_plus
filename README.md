@@ -1,24 +1,54 @@
-# README
+# TicTacToe+
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Многопользовательские крестики нолики на поле 10x10
 
-Things you may want to cover:
+## Старт игры
 
-* Ruby version
+Для старта необходимо зарегистрироваться.
 
-* System dependencies
+После выбрать или создать игру.
 
-* Configuration
+Если в игре уже есть два игрока - есть возможность наблюдать.
 
-* Database creation
+Если второго игрока ещё нет(первый игрок тот, кто создал игру), то на странице игры есть возможность вступить в игру нажав на кнопку "Вступить".
 
-* Database initialization
+## Запуск локально
 
-* How to run the test suite
+На вашей машине должны быть установлены следующие инструменты:
 
-* Services (job queues, cache servers, search engines, etc.)
+- Git
+- NodeJS
+- Ruby [2.7.1](https://github.com/Ymaril/tictactoe_plus/blob/master/.ruby-version#L1)
+- Rails [6.0.3](https://github.com/Ymaril/tictactoe_plus/blob/master/Gemfile#L7)
 
-* Deployment instructions
+##### 1. Склонировать репозиторий
 
-* ...
+```bash
+git clone git@github.com:Ymaril/tictactoe_plus.git
+```
+
+##### 2. Создание и найстройка базы данных
+
+```ruby
+bundle exec rake db:create
+bundle exec rake db:setup
+```
+
+##### 3. Выгрузка JS пакетов
+
+```ruby
+npm install
+```
+##### 4. Выгрузка GEM
+
+```ruby
+bundle install
+```
+
+##### 5. Старт сервера
+
+```ruby
+bundle exec rails s
+```
+
+http://localhost:3000
